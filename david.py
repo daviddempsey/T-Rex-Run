@@ -96,8 +96,8 @@ class Dino():
 
     # prevents dino from jumping out of bounds
     def checkbounds(self):
-        if self.rect.bottom > int(0.98*height):
-            self.rect.bottom = int(0.98*height)
+        if self.dinosize.bottom > int(0.98*height):
+            self.dinosize.bottom = int(0.98*height)
             self.isJumping = False
 
     def update(self):
