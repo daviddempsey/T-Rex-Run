@@ -131,7 +131,7 @@ class Dino():
             self.sprite = self.duckingdinos[(self.index) % 2]
             self.dinosize.width = self.duck_width
 
-        self.dino = self.dino.move(self.movement) # moves dino accordingly
+        self.dinosize = self.dinosize.move(self.movement) # moves dino accordingly
         self.checkbounds() # ensures dino stays on screen
 
         if not self.isDead and self.counter % 7 == 6 \
