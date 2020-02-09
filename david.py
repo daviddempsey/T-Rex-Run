@@ -142,3 +142,4 @@ class Dino():
                     checkPoint_sound.play()
 
         self.counter = (self.counter + 1) # increases time counter by 1
+        
