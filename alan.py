@@ -3,17 +3,33 @@ import sys
 import pygame
 import random
 from pygame import *
- 
+
 pygame.init()
 
-screen_size = (width, height) = (600, 150)
+clock = pygame.time.Clock()
 FPS = 60
 gravity = 0.6
 
+# Colors
+background = (235, 235, 235)
+
+# Initializes screen/window
+screen_size = (width, height) = (600, 150)
 screen = pygame.display.set_mode(screen_size)
-clock = pygame.time.Clock()
 pygame.display.set_caption("T-Rex Rush")
-pygame.display.update()
+
+def load_image(name, width, height, colorkey = None):
+    path = os.path.join('sprites', name) # Gets the name of an image from sprites folder
+    image = pygame.image.load(path) # Loads an image for display
+    image = image.convert() # Converts image into displayable one?
+    if colorkey is not None:
+        if colorkey is -1:
+            colorkey = image.get_at((0, 0))
+        image.set_colorkey(colorkey, RLEACCEL)
+
+    image = pygame.transform.scale(image, (width, height)) # Scales image dimensions
+
+    return (image, image.get_rect()) # Returns image / image rect
 
 def load_sprites(sheet_name, sprites_horiz, sprites_vert, scale_x = -1,
                  scale_y = -1, colorkey = None):
@@ -25,19 +41,19 @@ def load_sprites(sheet_name, sprites_horiz, sprites_vert, scale_x = -1,
 
     sprites = [] # array of sprites
 
-    width = sheet_rect.width / sprites_horiz # width of each sprite
-    height = sheet_rect.height / sprites_vert # height of each sprite
+    width = sheet_rect.width/sprites_horiz # width of each sprite
+    height = sheet_rect.height/sprites_vert # height of each sprite
 
     # loops through each sprite
     for i in range(0, sprites_vert):
         for j in range(0, sprites_horiz):
-            vert_pos = i * height # y-pos in sheet
-            horiz_pos = j * width # x-pos in sheet
+            vert_pos = i*height # y-pos in sheet
+            horiz_pos = j*width # x-pos in sheet
             # stores sprite position, width, and height
             sprite_rect = pygame.Rect((horiz_pos, vert_pos, width, height))
             sprite = pygame.Surface(sprite_rect.size) # surface for sprite
             sprite = sprite.convert() # converts image type
-            sprite.blit(spritesheet, (0, 0), sprite_rect) # draws sprite out
+            sprite.blit(spritesheet, (0,0), sprite_rect) # draws sprite out
 
             if colorkey is not None:
                 if colorkey == -1:
@@ -49,71 +65,135 @@ def load_sprites(sheet_name, sprites_horiz, sprites_vert, scale_x = -1,
 
             sprites.append(sprite) # appends sprite to sprite array
 
-    sprite_size = sprites[0].get_rect() # size of a single sprite
+    sprite_size = sprites[0].get_rect() # width/height of a single sprite
 
     return sprites, sprite_size # returns all sprites and size of each sprite
 
-def extractDigits(number):
-    digits = [] #Initializes array of digits
-    if number > -1: 
-        while(number / 10 != 0):
-            digits.append(number % 10)
-            number = int(number / 10)
+def intro_screen():
+    intro_dino = Dino(44, 47) # Initializes intro screen with a dino
+    gameStart = False # Game won't start until key press
 
-        digits.append(number % 10)
-        
-        for _ in range(len(digits), 5):
-            digits.append(0)
-        
-        digits.reverse()
-        return digits
+    # Loads the callout image and its dimensions
+    callout, callout_rect = load_image('call_out.png', 196, 45, -1) 
+    callout_rect.left = width * 0.05
+    callout_rect.top = height * 0.4
 
-class Scoreboard():
-    def __init__(self, offset_x = 1, offset_y = 1):
-        self.score = 0
-        self.tempimages, self.temprect = load_sprites('numbers.png', 12, 1, 11, int(11 * 6 / 5), -1)
-        self.image = pygame.Surface((55, int(11 * 6 / 5)))
-        self.rect = self.image.get_rect()
-        if offset_x == -1:
-            self.rect.left = width * 0.89 # Sets the width of the score object
-        else:
-            self.rect.left = offset_x # Will position current scoreboard to the right
-        if offset_y == -1:
-            self.rect.top = height * 0.1 # Sets the height of the score object
+    # Loads the ground sprite
+    intro_ground,intro_ground_rect = load_sprites('ground.png', 15, 1, -1, -1, -1)
+    intro_ground_rect.left = width / 20
+    intro_ground_rect.bottom = height
 
+    # Loads the logo image and its dimensions
+    logo,logo_rect = load_image('logo.png', 240, 40, -1)
+    logo_rect.centerx = width * 0.6
+    logo_rect.centery = height * 0.6
+    while not gameStart:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return True
+            if event.type == pygame.KEYDOWN: # On a key press ...
+                if event.key == pygame.K_SPACE or event.key == pygame.K_UP: # If spacebar or up arrow is pressed then dino jumps
+                    intro_dino.isJumping = True 
+                    gameStart = False # CHANGE TO TRUE WHEN FINISHED WITH gameplay()
+                    intro_dino.movement[1] = -1 * intro_dino.jumpSpeed # Modifies y movement for dinosaur jumping
+
+        intro_dino.update() # Dino will update when action is triggered
+
+        # Intro screen initialized
+        screen.fill(background) 
+        screen.blit(intro_ground[0], intro_ground_rect)
+        screen.blit(logo,logo_rect)
+        screen.blit(callout, callout_rect)
+        intro_dino.draw()
+
+        pygame.display.update() # Presents GUI
+
+        clock.tick(FPS)
+
+class Dino():
+    def __init__(self, size_x = -1, size_y = -1):
+        # loads standing dinosaur sprites
+        self.dinos, self.dinosize = load_sprites('dino.png', 5, 1, size_x, size_y, -1)
+        # loads ducking dinosaur sprites
+        self.duckingdinos, self.ducksize = load_sprites('dino_ducking.png', 2, 1, 59, size_y, -1)
+        self.dinosize.bottom = int(0.98*height) # sets bottom y-pos ?
+        self.dinosize.left = width/15 # sets left pos of dinosaur
+
+        self.dino = self.dinos[0] # initial dinosaur sprite
+
+        self.index = 0 # sprite index in sprite sheet
+        self.counter = 0 # keeps track of time passed
+        self.score = 0 # keeps track of score
+
+        # initial state conditions
+        self.isJumping = False
+        self.isDead = False
+        self.isDucking = False
+        self.isBlinking = False
+
+        self.movement = [0, 0] # x/y movement of dinosaur
+        self.jumpSpeed = 11.5
+
+        # stores width of ducking and standing dino
+        self.standing_width = self.dinosize.width
+        self.duck_width = self.ducksize.width
+
+    # draws out dino on screen
     def draw(self):
-        screen.blit(self.image, self.rect)
+        screen.blit(self.dino, self.dinosize)
 
-    def update(self, score):
-        score_digits = extractDigits(score)
-        self.image.fill((255, 255, 255))
-        for s in score_digits:
-            self.image.blit(self.tempimages[s], self.temprect)
-            self.temprect.left += self.temprect.width
-        
-        self.temprect.left = 0
+    # prevents dino from jumping out of bounds
+    def checkbounds(self):
+        if self.dinosize.bottom > int(0.98*height):
+            self.dinosize.bottom = int(0.98*height)
+            self.isJumping = False
 
-def game_controller():
-    # load sprites
-    game_quit = False  # when user clicks on the close button
-    while not game_quit:
-        # while not game over
-        if pygame.display.get_surface() is None:
-            print("Couldn't load display surface")
-            game_quit = True
+    def update(self):
+        if self.isJumping: # accounts for gravity
+            self.movement[1] = self.movement[1] + gravity
+            self.index = 0
+
+        elif self.isBlinking:
+            if self.index == 0: # changes sprite to blinking dino
+                if self.counter % 400 == 399:
+                    self.index = (self.index + 1) % 2 # should be 1
+            else: # changes back to eyes open dino
+                if self.counter % 20 == 19:
+                    self.index = (self.index + 1) % 2 # should be 0
+
+        elif self.isDucking:
+            if self.counter % 5 == 0: # changes sprite index to move feet
+                self.index = (self.index + 1) % 2
+        else: # if dino isn't ducking and just running
+            if self.counter % 5 == 0: # changes sprite index to move feet
+                self.index = (self.index +1) % 2 + 2
+
+        if self.isDead: # changes sprite to dead dino
+            self.index = 4
+
+        if not self.isDucking:
+            self.sprite = self.dinos[self.index] # adjusts sprite accordingly
+            self.dinosize.width = self.standing_width
         else:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    game_quit = True
-            
-            screen.fill((255, 255, 255))
-            pygame.display.update()
+            # adjusts sprite to ducking sprite
+            self.sprite = self.duckingdinos[(self.index) % 2]
+            self.dinosize.width = self.duck_width
 
-        if game_quit:
-            break
+        self.dinosize = self.dinosize.move(self.movement) # moves dino accordingly
+        self.checkbounds() # ensures dino stays on screen
 
-        # update sprites
-    pygame.quit()
-    quit()
+        if not self.isDead and self.counter % 7 == 6 \
+                and self.isBlinking == False:
+            self.score += 1 # score increases every update
+            if self.score % 100 == 0 and self.score != 0: # checkpoint reached
+                if pygame.mixer.get_init() != None:
+                    checkPoint_sound.play()
 
-game_controller()
+        self.counter = (self.counter + 1) # increases time counter by 1
+
+def main():
+    isGameQuit = intro_screen()
+    #if not isGameQuit:
+        #gameplay()
+
+main()
