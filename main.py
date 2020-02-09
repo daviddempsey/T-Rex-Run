@@ -4,7 +4,7 @@ import yada
 
 
 def game_controller():
-    screen_size = (600, 150)
+    screen_size = (width,height)=(600, 150)
     background_col = (235, 235, 235)
 
     pygame.init()
