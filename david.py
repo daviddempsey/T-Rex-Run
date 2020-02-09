@@ -20,6 +20,7 @@ pygame.display.set_caption("T-Rex Rush")
 
 # forked repo has sound constants here
 
+
 def load_sprites(sheet_name, sprites_horiz, sprites_vert, scale_x = -1,
                  scale_y = -1, colorkey = None):
     sheet_path = os.path.join('sprites', sheet_name) # stores path
@@ -57,3 +58,18 @@ def load_sprites(sheet_name, sprites_horiz, sprites_vert, scale_x = -1,
     sprite_size = sprites[0].get_rect() # size of a single sprite
 
     return sprites, sprite_size # returns all sprites and size of each sprite
+
+class TRex():
+    def init(self, size_x = -1, size_y = -1):
+        # loads standing dinosaur sprites
+        self.dinos, self.dinosize = load_sprites('dino.png', 5, 1, size_x, \
+                                                 size_y, -1)
+        # loads ducking dinosaur sprites
+        self.duckingdinos, self.ducksize = load_sprites('dino_ducking.png',\
+                                                        2, 1, 59, size_y,\
+                                                        -1)
+
+
+    def draw(self):
+    def checkbounds(self):
+    def update(self):
