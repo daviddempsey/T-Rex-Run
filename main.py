@@ -1,15 +1,16 @@
 import pygame as pygame
+import yada
 
-screen_size = (600, 150)
-background_col = (235, 235, 235)
-
-pygame.init()
-pygame.display.set_caption("T-Rex Run")
-
-display_surface = pygame.display.set_mode(screen_size)
 
 
 def game_controller():
+    screen_size = (width,height)=(600, 150)
+    background_col = (235, 235, 235)
+
+    pygame.init()
+    pygame.display.set_caption("T-Rex Run")
+
+    display_surface = pygame.display.set_mode(screen_size)
     # load sprites
     game_quit = False;  # when user clicks on the close button
     while not game_quit:
