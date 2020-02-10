@@ -131,7 +131,7 @@ class Dino():
             self.sprite = self.duckingdinos[(self.index) % 2]
             self.dinosize.width = self.duck_width
 
-        self.dinosize = self.dinosize.move(self.movement) # moves dino accordingly
+        self.dinosize = self.dinosize.move(self.movement) # moves dino accordingly # Changed dino to dinosize -Alan :)
         self.checkbounds() # ensures dino stays on screen
 
         if not self.isDead and self.counter % 7 == 6 \
@@ -142,4 +142,3 @@ class Dino():
                     checkPoint_sound.play()
 
         self.counter = (self.counter + 1) # increases time counter by 1
-        
