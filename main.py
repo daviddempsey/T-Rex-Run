@@ -1,7 +1,9 @@
 import pygame as pygame
 import yada
-
-
+from dino import *
+from ptera import *
+from cactus import *
+from loadSprites import *
 
 def game_controller():
     screen_size = (width,height)=(600, 150)
