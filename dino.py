@@ -1,3 +1,6 @@
+import pygame
+from loadSprites import *
+
 class Dino():
     def __init__(self, size_x = -1, size_y = -1):
         # loads standing dinosaur sprites

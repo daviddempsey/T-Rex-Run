@@ -1,3 +1,6 @@
+import pygame
+from loadSprites import *
+
 class Cactus(pygame.sprite.Sprite):
     def __init__(self, speed=5, size_x = -1, size_y = -1):
         pygame.sprite.Sprite.__init__(self, self.containers) # creates sprite

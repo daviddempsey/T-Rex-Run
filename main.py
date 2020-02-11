@@ -1,9 +1,13 @@
-import pygame as pygame
-import yada
+import os
+import sys
+import pygame
+from pygame import *
+
 from dino import *
 from ptera import *
 from cactus import *
 from loadSprites import *
+from cloud import *
 
 def game_controller():
     screen_size = (width,height)=(600, 150)

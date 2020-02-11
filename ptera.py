@@ -1,3 +1,6 @@
+import pygame
+from loadSprites import *
+
 class Ptera(pygame.sprite.Sprite):
     def __init__(self, speed=5, sizex=-1, sizey=-1):
         pygame.sprite.Sprite.__init__(self.self.containers)
