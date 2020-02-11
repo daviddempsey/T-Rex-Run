@@ -1,3 +1,7 @@
+import pygame
+from pygame import *
+import os
+
 def load_sprites(sheet_name, sprites_horiz, sprites_vert, scale_x = -1,
                  scale_y = -1):
     sheet_path = os.path.join('sprites', sheet_name) # stores path
@@ -9,7 +13,7 @@ def load_sprites(sheet_name, sprites_horiz, sprites_vert, scale_x = -1,
     sprites = [] # array of sprites
 
     width = sheet_rect.width/sprites_horiz # width of each sprite
-    height = sheet_rect.height/sprite_vert # height of each sprite
+    height = sheet_rect.height/sprites_vert # height of each sprite
 
     # loops through each sprite
     for i in range(0, sprites_vert):
@@ -23,7 +27,7 @@ def load_sprites(sheet_name, sprites_horiz, sprites_vert, scale_x = -1,
             sprite.blit(spritesheet, (0,0), sprite_rect) # draws sprite out
 
             colorkey = sprite.get_at((0,0)) # color at bottom right
-            sprite.set_colorkey(colorey, RLEACCEL)
+            sprite.set_colorkey(colorkey, RLEACCEL)
 
             if scale_x != -1 or scale_y != -1: # scales appropriately
                 sprite = pygame.transform.scale(sprite, (scale_x, scale_y))
