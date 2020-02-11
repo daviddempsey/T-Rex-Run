@@ -18,21 +18,21 @@ screen_size = (width, height) = (600, 150)
 screen = pygame.display.set_mode(screen_size)
 pygame.display.set_caption("T-Rex Rush")
 
-def load_image(name, width, height, colorkey = None):
+def load_image(name, width, height):
     path = os.path.join('sprites', name) # Gets the name of an image from sprites folder
     image = pygame.image.load(path) # Loads an image for display
     image = image.convert() # Converts image into displayable one?
-    if colorkey is not None:
-        if colorkey is -1:
-            colorkey = image.get_at((0, 0))
-        image.set_colorkey(colorkey, RLEACCEL)
+    
+    # Sets the transparency of each image
+    colorkey = image.get_at((0, 0))    
+    image.set_colorkey(colorkey, RLEACCEL)
 
     image = pygame.transform.scale(image, (width, height)) # Scales image dimensions
 
     return (image, image.get_rect()) # Returns image / image rect
 
 def load_sprites(sheet_name, sprites_horiz, sprites_vert, scale_x = -1,
-                 scale_y = -1, colorkey = None):
+                 scale_y = -1):
     sheet_path = os.path.join('sprites', sheet_name) # stores path
     spritesheet = pygame.image.load(sheet_path) # loads spritesheet
     spritesheet = spritesheet.convert() # converts image type
@@ -55,10 +55,9 @@ def load_sprites(sheet_name, sprites_horiz, sprites_vert, scale_x = -1,
             sprite = sprite.convert() # converts image type
             sprite.blit(spritesheet, (0,0), sprite_rect) # draws sprite out
 
-            if colorkey is not None:
-                if colorkey == -1:
-                    colorkey = sprite.get_at((0,0)) # color at bottom right
-                sprite.set_colorkey(colorkey, RLEACCEL)
+            
+            colorkey = sprite.get_at((0,0)) # color at bottom right
+            sprite.set_colorkey(colorkey, RLEACCEL)
 
             if scale_x != -1 or scale_y != -1: # scales appropriately
                 sprite = pygame.transform.scale(sprite, (scale_x, scale_y))
@@ -74,17 +73,17 @@ def intro_screen():
     gameStart = False # Game won't start until key press
 
     # Loads the callout image and its dimensions
-    callout, callout_rect = load_image('call_out.png', 196, 45, -1) 
+    callout, callout_rect = load_image('call_out.png', 196, 45) 
     callout_rect.left = width * 0.05
     callout_rect.top = height * 0.4
 
     # Loads the ground sprite
-    intro_ground,intro_ground_rect = load_sprites('ground.png', 15, 1, -1, -1, -1)
+    intro_ground,intro_ground_rect = load_sprites('ground.png', 15, 1, -1, -1)
     intro_ground_rect.left = width / 20
     intro_ground_rect.bottom = height
 
     # Loads the logo image and its dimensions
-    logo,logo_rect = load_image('logo.png', 240, 40, -1)
+    logo,logo_rect = load_image('logo.png', 240, 40)
     logo_rect.centerx = width * 0.6
     logo_rect.centery = height * 0.6
     while not gameStart:
@@ -113,9 +112,9 @@ def intro_screen():
 class Dino():
     def __init__(self, size_x = -1, size_y = -1):
         # loads standing dinosaur sprites
-        self.dinos, self.dinosize = load_sprites('dino.png', 5, 1, size_x, size_y, -1)
+        self.dinos, self.dinosize = load_sprites('dino.png', 5, 1, size_x, size_y)
         # loads ducking dinosaur sprites
-        self.duckingdinos, self.ducksize = load_sprites('dino_ducking.png', 2, 1, 59, size_y, -1)
+        self.duckingdinos, self.ducksize = load_sprites('dino_ducking.png', 2, 1, 59, size_y)
         self.dinosize.bottom = int(0.98*height) # sets bottom y-pos ?
         self.dinosize.left = width/15 # sets left pos of dinosaur
 
@@ -190,7 +189,7 @@ class Dino():
                     checkPoint_sound.play()
 
         self.counter = (self.counter + 1) # increases time counter by 1
-
+                
 def main():
     isGameQuit = intro_screen()
     #if not isGameQuit:
