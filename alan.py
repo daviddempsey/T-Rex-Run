@@ -20,19 +20,6 @@ background = (235, 235, 235)
 # Initializes screen/window
 pygame.display.set_caption("T-Rex Rush")
 
-def load_image(name, width, height):
-    path = os.path.join('sprites', name) # Gets the name of an image from sprites folder
-    image = pygame.image.load(path) # Loads an image for display
-    image = image.convert() # Converts image into displayable one?
-    
-    # Sets the transparency of each image
-    colorkey = image.get_at((0, 0))    
-    image.set_colorkey(colorkey, RLEACCEL)
-
-    image = pygame.transform.scale(image, (width, height)) # Scales image dimensions
-
-    return (image, image.get_rect()) # Returns image / image rect
-
 def intro_screen():
     intro_dino = Dino(44, 47) # Initializes intro screen with a dino
     gameStart = False # Game won't start until key press

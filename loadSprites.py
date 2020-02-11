@@ -37,3 +37,16 @@ def load_sprites(sheet_name, sprites_horiz, sprites_vert, scale_x = -1,
     sprite_size = sprites[0].get_rect() # width/height of a single sprite
 
     return sprites, sprite_size # returns all sprites and size of each sprite
+
+def load_image(name, width, height):
+    path = os.path.join('sprites', name) # Gets the name of an image from sprites folder
+    image = pygame.image.load(path) # Loads an image for display
+    image = image.convert() # Converts image into displayable one?
+    
+    # Sets the transparency of each image
+    colorkey = image.get_at((0, 0))    
+    image.set_colorkey(colorkey, RLEACCEL)
+
+    image = pygame.transform.scale(image, (width, height)) # Scales image dimensions
+
+    return (image, image.get_rect()) # Returns image / image rect
