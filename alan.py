@@ -61,6 +61,18 @@ def intro_screen():
 
         clock.tick(FPS)
 
+def disp_gameOver_msg(retry_image, gameover_image):
+    retry_image_rect = retry_image.get_rect()
+    retry_image_rect.centerx = width / 2
+    retry_image_rect.top = height * 0.52
+
+    gameover_rect = gameover_image.get_rect()
+    gameover_rect.centerx = width / 2
+    gameover_rect.centery = height * 0.35
+
+    screen.blit(retry_image, retry_image_rect)
+    screen.blit(gameover_image, gameover_rect)
+
 def main():
     isGameQuit = intro_screen()
     #if not isGameQuit:
