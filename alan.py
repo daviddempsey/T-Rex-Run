@@ -75,7 +75,7 @@ def disp_gameOver_msg(retry_image, gameover_image):
 
 def main():
     isGameQuit = intro_screen()
-    #if not isGameQuit:
-        #gameplay()
+    if not isGameQuit:
+        gameplay()
 
 main()

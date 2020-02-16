@@ -8,25 +8,26 @@ from ptera import *
 from cactus import *
 from loadSprites import *
 from cloud import *
+from ground import *
+from gameSetting import *
 
 screen_size = (width, height)=(600, 150)
 background = (235, 235, 235)
 clock = pygame.time.Clock()
 FPS = 60
 
-pygame.init()
-pygame.display.set_caption("T-Rex Run")
-display_surface = pygame.display.set_mode(screen_size)
-
 def game_controller():
-    pygame.init()
-    pygame.display.set_caption("T-Rex Run")
+    intro_screen()
 
-    display_surface = pygame.display.set_mode(screen_size)
+    ground = Ground()
+
     # load sprites
     game_quit = False;  # when user clicks on the close button
     while not game_quit:
         # while not game over
+
+        ground.update()
+
         if pygame.display.get_surface() is None:
             print("Couldn't load display surface")
             game_quit = True
@@ -36,12 +37,13 @@ def game_controller():
                     game_quit = True
 
             display_surface.fill(background)
+            ground.draw()
+
             pygame.display.update()
 
         if game_quit:
             break
 
-        # update sprites
     pygame.quit()
     quit()
 
@@ -70,7 +72,7 @@ def intro_screen():
             if event.type == pygame.KEYDOWN: # On a key press ...
                 if event.key == pygame.K_SPACE or event.key == pygame.K_UP: # If spacebar or up arrow is pressed then dino jumps
                     intro_dino.isJumping = True 
-                    gameStart = False # CHANGE TO TRUE WHEN FINISHED WITH gameplay()
+                    gameStart = True # CHANGE TO TRUE WHEN FINISHED WITH gameplay()
                     intro_dino.movement[1] = -1 * intro_dino.jumpSpeed # Modifies y movement for dinosaur jumping
 
         intro_dino.update() # Dino will update when action is triggered
@@ -98,10 +100,4 @@ def disp_gameOver_msg(retry_image, gameover_image):
     screen.blit(retry_image, retry_image_rect)
     screen.blit(gameover_image, gameover_rect)
 
-def main():
-    isGameQuit = intro_screen()
-    #if not isGameQuit:
-        #gameplay()
-
 game_controller()
-main()

@@ -38,15 +38,20 @@ def load_sprites(sheet_name, sprites_horiz, sprites_vert, scale_x = -1,
 
     return sprites, sprite_size # returns all sprites and size of each sprite
 
-def load_image(name, width, height):
-    path = os.path.join('sprites', name) # Gets the name of an image from sprites folder
-    image = pygame.image.load(path) # Loads an image for display
-    image = image.convert() # Converts image into displayable one?
-    
-    # Sets the transparency of each image
-    colorkey = image.get_at((0, 0))    
+def load_image(filename, width = -1, height = -1):
+    filepath = os.path.join('sprites',filename)
+    # load image from file name and convert it into pixel format
+    image = pygame.image.load(filepath).convert()
+
+    # get background color
+    colorkey = image.get_at((0, 0))
+    # set background to transparent
+    # RLEACCEL is a flag that makes the image render faster
     image.set_colorkey(colorkey, RLEACCEL)
 
-    image = pygame.transform.scale(image, (width, height)) # Scales image dimensions
+    # scale the image if needed
+    if width != -1 or height != -1:
+        image = pygame.transform.scale(image, (width, height))
 
-    return (image, image.get_rect()) # Returns image / image rect
+    # returns the image and the image rectangle
+    return image, image.get_rect()

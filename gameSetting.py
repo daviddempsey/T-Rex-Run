@@ -9,7 +9,7 @@ from pygame import *
 screen_size = (screen_w, screen_h) = (600, 150)
 
 # set background color
-background_col = (235, 235, 235)
+background = (235, 235, 235)
 
 # initialize pygame
 pygame.init()
@@ -18,7 +18,7 @@ pygame.init()
 display_surface = pygame.display.set_mode(screen_size)
 pygame.display.set_caption("T-Rex Run")
 
-def load_image(filename, scalex=-1, scaley=-1):
+def load_image(filename, width = -1, height = -1):
     filepath = os.path.join('sprites',filename)
     # load image from file name and convert it into pixel format
     image = pygame.image.load(filepath).convert()
@@ -30,8 +30,8 @@ def load_image(filename, scalex=-1, scaley=-1):
     image.set_colorkey(colorkey, RLEACCEL)
 
     # scale the image if needed
-    if scalex != -1 or scaley != -1:
-        image = pygame.transform.scale(image, (sizex, sizey))
+    if width != -1 or height != -1:
+        image = pygame.transform.scale(image, (width, height))
 
     # returns the image and the image rectangle
     return image, image.get_rect()
