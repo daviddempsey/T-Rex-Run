@@ -5,7 +5,7 @@ class Cactus(pygame.sprite.Sprite):
     def __init__(self, speed=5, size_x = -1, size_y = -1):
         pygame.sprite.Sprite.__init__(self, self.containers) # creates sprite
         self.cacti, self.cactusrect = load_sprites('cacti-small.png', 3,
-                                                       1, sizex, sizey)
+                                                       1, size_x, size_y)
         self.cactusrect.bottom = int(0.98*height) # positions cacti on ground
         self.cactusrect.left = width + self.cactusrect.width # pos off screen
         self.cactus = self.cacti[random.randrange(0,3)] # random sprite

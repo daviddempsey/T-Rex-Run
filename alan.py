@@ -1,5 +1,6 @@
 import os
 import sys
+sys.path.insert(0, "./Objects")
 import pygame
 from pygame import *
 
@@ -72,10 +73,3 @@ def disp_gameOver_msg(retry_image, gameover_image):
 
     screen.blit(retry_image, retry_image_rect)
     screen.blit(gameover_image, gameover_rect)
-
-def main():
-    isGameQuit = intro_screen()
-    if not isGameQuit:
-        gameplay()
-
-main()
