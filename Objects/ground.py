@@ -4,7 +4,11 @@ sys.path.insert(0, "./Objects")
 import pygame
 from pygame import *
 
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
 from display import *
+
 from cactus import *
 from cloud import *
 from dino import *
@@ -13,7 +17,7 @@ from ptera import *
 
 class Ground():
     def __init__(self,speed=-5):
-	
+
         #loadimageandtherectanglearoundtheimage
         self.ground1,self.groundrect1 = load_image('ground.png')
         self.ground2,self.groundrect2 = load_image('ground.png')
