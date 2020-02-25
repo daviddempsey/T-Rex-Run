@@ -4,7 +4,11 @@ sys.path.insert(0, "./Objects")
 import pygame
 from pygame import *
 
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
 from display import *
+
 from cactus import *
 from cloud import *
 from dino import *
