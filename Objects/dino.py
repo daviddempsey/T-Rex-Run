@@ -1,9 +1,20 @@
+import os
+import sys
+sys.path.insert(0, "./Objects")
 import pygame
-from loadSprites import *
+from pygame import *
 
-gravity = 0.6
-screen_size = (width, height) = (600, 150)
-screen = pygame.display.set_mode(screen_size)
+from display import *
+from cactus import *
+from cloud import *
+from dino import *
+from ground import *
+from ptera import *
+from scoreboard import *
+
+#gravity = 0.6
+#screen_size = (width, height) = (600, 150)
+#screen = pygame.display.set_mode(screen_size)
 
 class Dino():
     def __init__(self, size_x = -1, size_y = -1):

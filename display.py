@@ -1,12 +1,16 @@
 import os
+import sys
+sys.path.insert(0, "./Objects")
 import pygame
 from pygame import *
-from cactus.py import *
-from cloud.py import *
-from dino.py import *
-from ground.py import *
-from ptera.py import *
-from scoreboard.py import *
+
+from display import *
+from cactus import *
+from cloud import *
+from dino import *
+from ground import *
+from ptera import *
+from scoreboard import *
 
 pygame.init() # Initialize pygame
 
@@ -109,3 +113,15 @@ def intro_screen():
         pygame.display.update() # Presents GUI
 
         clock.tick(FPS)
+
+def disp_gameOver_msg(retry_btn_image, gameover_image):
+    retrybtn_rect = retbutton_image.get_rect()
+    retrybtn_rect.centerx = width / 2
+    retrybtn_rect.top = height * 0.52
+
+    gameover_rect = gameover_image.get_rect()
+    gameover_rect.centerx = width / 2
+    gameover_rect.centery = height * 0.35
+
+    screen.blit(retry_btn_image, retry_btn_rect)
+    screen.blit(gameover_image, gameover_rect)

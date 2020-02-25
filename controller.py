@@ -1,12 +1,16 @@
 import os
-
+import sys
+sys.path.insert(0, "./Objects")
 import pygame
 from pygame import *
-from gameSetting import *
+
+from display import *
+from cactus import *
+from cloud import *
+from dino import *
 from ground import *
-
-
-
+from ptera import *
+from scoreboard import *
 
 def game_controller():
 
@@ -25,18 +29,17 @@ def game_controller():
         else:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    game_quit = True;
+                    game_quit = True
 
-            display_surface.fill(background_col);
+            screen.fill(background_color)
             ground.draw()
 
             pygame.display.update()
 
         if game_quit:
-            break;
+            break
 
     pygame.quit()
     quit()
-
 
 game_controller()

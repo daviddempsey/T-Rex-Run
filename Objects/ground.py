@@ -1,9 +1,15 @@
 import os
-
+import sys
+sys.path.insert(0, "./Objects")
 import pygame
-from pygame import*
-from gameSetting import*
+from pygame import *
 
+from display import *
+from cactus import *
+from cloud import *
+from dino import *
+from ground import *
+from ptera import *
 
 class Ground():
     def __init__(self,speed=-5):
@@ -13,7 +19,7 @@ class Ground():
         self.ground2,self.groundrect2 = load_image('ground.png')
 
         #placethegrondatthebottomofthescreen
-        self.groundrect1.bottom = self.groundrect2.bottom = screen_h
+        self.groundrect1.bottom = self.groundrect2.bottom = height
         self.groundrect1.right = self.groundrect2.left#connect the two grounds
 
         #setthespeed
@@ -21,8 +27,8 @@ class Ground():
 
     def draw(self):
         #renderthegroundontothescreen
-        display_surface.blit(self.ground1,self.groundrect1)
-        display_surface.blit(self.ground2,self.groundrect2)
+        screen.blit(self.ground1,self.groundrect1)
+        screen.blit(self.ground2,self.groundrect2)
 
     def update(self):
         #movethegroundacrossthescreen

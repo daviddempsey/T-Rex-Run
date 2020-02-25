@@ -1,5 +1,17 @@
+import os
+import sys
+sys.path.insert(0, "./Objects")
+import random
 import pygame
-from loadSprites import *
+from pygame import *
+
+from display import *
+from cactus import *
+from cloud import *
+from dino import *
+from ground import *
+from ptera import *
+from scoreboard import *
 
 class Cactus(pygame.sprite.Sprite):
     def __init__(self, speed=5, size_x = -1, size_y = -1):

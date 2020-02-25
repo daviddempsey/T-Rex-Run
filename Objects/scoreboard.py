@@ -1,8 +1,19 @@
+import os
+import sys
+sys.path.insert(0, "./Objects")
 import pygame
-from loadSprites import *
+from pygame import *
 
-screen_size = (width, height) = (600, 150)
-screen = pygame.display.set_mode(screen_size)
+from display import *
+from cactus import *
+from cloud import *
+from dino import *
+from ground import *
+from ptera import *
+from scoreboard import *
+
+#screen_size = (width, height) = (600, 150)
+#screen = pygame.display.set_mode(screen_size)
 
 class Scoreboard():
     def __init__(self, width =- 1, height =- 1):
