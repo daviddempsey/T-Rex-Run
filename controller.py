@@ -5,14 +5,12 @@ import pygame
 from pygame import *
 
 from display import *
-from cactus import *
-from cloud import *
-from dino import *
-from ground import *
-from ptera import *
-from scoreboard import *
-from gameSetting import *
-from ground import *
+from objects.cactus import *
+from objects.cloud import *
+from objects.dino import *
+from objects.ground import *
+from objects.ptera import *
+from objects.scoreboard import *
 
 
 def game_controller():
