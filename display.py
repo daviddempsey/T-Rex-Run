@@ -1,6 +1,12 @@
 import os
 import pygame
 from pygame import *
+from cactus.py import *
+from cloud.py import *
+from dino.py import *
+from ground.py import *
+from ptera.py import *
+from scoreboard.py import *
 
 pygame.init() # Initialize pygame
 
@@ -30,8 +36,8 @@ def load_image(filename, width = -1, height = -1):
     # Returns the image and the image rectangle
     return (image, image.get_rect())
 
-def load_sprites(sheet_name, sprites_horiz, sprites_vert, width = -1, height = -1):
-    path = os.path.join('sprites', sheet_name) # Gets path of sprites in its directory
+def load_sprites(filename, sprites_horiz, sprites_vert, width = -1, height = -1):
+    path = os.path.join('sprites', filename) # Gets path of sprites in its directory
     spritesheet = pygame.image.load(path).convert() # Loads image from file name and convert it into pixel format
 
     sheet_rect = spritesheet.get_rect() # Stores width/height of sprite sheet
