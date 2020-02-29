@@ -124,7 +124,7 @@ def game_controller():
                     game_quit = True
 
             screen.fill(background_color)
-            ground.draw()
+            new_ground.draw()
 
             pygame.display.update()
 
