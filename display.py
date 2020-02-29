@@ -13,6 +13,7 @@ pygame.display.set_caption("T-Rex-Run") # Sets window caption/title
 
 FPS = 60
 clock = pygame.time.Clock()
+gravity = 0.6
 
 def load_image(filename, width = -1, height = -1):
     path = os.path.join('sprites', filename) # Gets path of sprites in its directory
