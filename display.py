@@ -57,7 +57,7 @@ def load_sprites(filename, sprites_horiz, sprites_vert, width = -1, height = -1)
             sprite.set_colorkey(colorkey, RLEACCEL)
 
             if width != -1 or height != -1: # Scales appropriately
-                sprite = pygame.transform.scale(sprite, ((int)width, (int)height))
+                sprite = pygame.transform.scale(sprite, (int(width), int(height)))
 
             sprites.append(sprite) # Appends sprite to sprite array
 
