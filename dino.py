@@ -24,13 +24,13 @@ from scoreboard import *
 class Dino():
     def __init__(self, size_x = -1, size_y = -1):
         # loads standing dinosaur sprites
-        self.dinos, self.dinorect = load_sprites('dino.png', 5, 1, size_x, \
+        self.dinos, self.rect = load_sprites('dino.png', 5, 1, size_x, \
                                                  size_y)
         # loads ducking dinosaur sprites
         self.duckingdinos, self.ducksize = load_sprites('dino_ducking.png',\
                                                         2, 1, 59, size_y)
-        self.dinorect.bottom = int(0.98*height) # sets bottom y-pos ?
-        self.dinorect.left = width/15 # sets left pos of dinosaur
+        self.rect.bottom = int(0.98*height) # sets bottom y-pos ?
+        self.rect.left = width/15 # sets left pos of dinosaur
 
         self.dino = self.dinos[0] # initial dinosaur sprite
 
@@ -48,17 +48,17 @@ class Dino():
         self.jumpSpeed = 11.5
 
         # stores width of ducking and standing dino
-        self.standing_width = self.dinorect.width
+        self.standing_width = self.rect.width
         self.duck_width = self.ducksize.width
 
     # draws out dino on screen
     def draw(self):
-        screen.blit(self.dino, self.dinorect)
+        screen.blit(self.dino, self.rect)
 
     # prevents dino from jumping out of bounds
     def checkbounds(self):
-        if self.dinorect.bottom > int(0.98*height):
-            self.dinorect.bottom = int(0.98*height)
+        if self.rect.bottom > int(0.98*height):
+            self.rect.bottom = int(0.98*height)
             self.isJumping = False
 
     def update(self):
@@ -86,13 +86,13 @@ class Dino():
 
         if not self.isDucking:
             self.sprite = self.dinos[self.index] # adjusts sprite accordingly
-            self.dinorect.width = self.standing_width
+            self.rect.width = self.standing_width
         else:
             # adjusts sprite to ducking sprite
             self.sprite = self.duckingdinos[(self.index) % 2]
-            self.dinorect.width = self.duck_width
+            self.rect.width = self.duck_width
 
-        self.dinorect = self.dinorect.move(self.movement) # moves dino accordingly # Changed dino to dinorect -Alan :)
+        self.rect = self.rect.move(self.movement) # moves dino accordingly # Changed dino to rect -Alan :)
         self.checkbounds() # ensures dino stays on screen
 
         if not self.isDead and self.counter % 7 == 6 \

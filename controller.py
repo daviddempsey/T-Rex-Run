@@ -1,16 +1,15 @@
 import os
 import sys
-sys.path.insert(0, "./Objects")
 import pygame
 from pygame import *
 
 from display import *
-from objects.cactus import *
-from objects.cloud import *
-from objects.dino import *
-from objects.ground import *
-from objects.ptera import *
-from objects.scoreboard import *
+from cactus import *
+from cloud import *
+from dino import *
+from ground import *
+from ptera import *
+from scoreboard import *
 
 
 def game_controller():
@@ -37,14 +36,14 @@ def game_controller():
     Cloud.containers = clouds
 
     # loads replay/game over images
-    retbutton_image,retbutton_rect = load_image('replay_button.png',35,31,-1)
-    gameover_image,gameover_rect = load_image('game_over.png',190,11,-1)
+    retbutton_image,retbutton_rect = load_image('replay_button.png',35,31)
+    gameover_image,gameover_rect = load_image('game_over.png',190,11)
 
     # loads in numbers for keeping score
-    temp_images,temp_rect = load_sprite_sheet('numbers.png',12,1,11,int(11*6/5),-1)
+    temp_images,temp_rect = load_sprites('numbers.png',12,1,11,int(11*6/5))
     HI_image = pygame.Surface((22,int(11*6/5)))
     HI_rect = HI_image.get_rect()
-    HI_image.fill(background_col)
+    HI_image.fill(background_color)
     HI_image.blit(temp_images[10],temp_rect)
     temp_rect.left += temp_rect.width
     HI_image.blit(temp_images[11],temp_rect)

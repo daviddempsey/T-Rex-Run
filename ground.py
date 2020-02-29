@@ -19,30 +19,30 @@ class Ground():
     def __init__(self,speed=-5):
 
         #loadimageandtherectanglearoundtheimage
-        self.ground1,self.groundrect1 = load_image('ground.png')
-        self.ground2,self.groundrect2 = load_image('ground.png')
+        self.ground1,self.rect1 = load_image('ground.png')
+        self.ground2,self.rect2 = load_image('ground.png')
 
         #placethegrondatthebottomofthescreen
-        self.groundrect1.bottom = self.groundrect2.bottom = height
-        self.groundrect1.right = self.groundrect2.left#connect the two grounds
+        self.rect1.bottom = self.rect2.bottom = height
+        self.rect1.right = self.rect2.left#connect the two grounds
 
         #setthespeed
         self.speed = speed
 
     def draw(self):
         #renderthegroundontothescreen
-        screen.blit(self.ground1,self.groundrect1)
-        screen.blit(self.ground2,self.groundrect2)
+        screen.blit(self.ground1,self.rect1)
+        screen.blit(self.ground2,self.rect2)
 
     def update(self):
         #movethegroundacrossthescreen
-        self.groundrect1.left += self.speed
-        self.groundrect2.left += self.speed
+        self.rect1.left += self.speed
+        self.rect2.left += self.speed
 
         #onceground1isoutofthescreenplaceitbehindground2
-        if self.groundrect1.right<0:
-            self.groundrect1.left = self.groundrect2.right
+        if self.rect1.right<0:
+            self.rect1.left = self.rect2.right
 
         #onceground2isoutofthescreen,placeitbehindground1
-        if self.groundrect2.right<0:
-            self.groundrect2.left = self.groundrect1.right
+        if self.rect2.right<0:
+            self.rect2.left = self.rect1.right
