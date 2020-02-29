@@ -203,7 +203,7 @@ def game_controller():
 
 game_controller()
 def main():
-    isGameQuit = introscreen()
+    isGameQuit = intro_screen()
     if not isGameQuit:
         gameplay()
 
