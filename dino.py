@@ -7,7 +7,6 @@ from pygame import *
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
-from display import *
 
 from cactus import *
 from cloud import *
@@ -15,6 +14,7 @@ from dino import *
 from ground import *
 from ptera import *
 from scoreboard import *
+from display import *
 
 
 #gravity = 0.6
@@ -23,16 +23,16 @@ from scoreboard import *
 
 class Dino():
     def __init__(self, size_x = -1, size_y = -1):
-        # loads standing dinosaur sprites
+        # loads standing imagesaur sprites
         self.images, self.rect = load_sprites('dino.png', 5, 1, size_x, \
                                                  size_y)
-        # loads ducking dinosaur sprites
+        # loads ducking imagesaur sprites
         self.images1, self.rect1 = load_sprites('dino_ducking.png',\
                                                         2, 1, 59, size_y)
         self.rect.bottom = int(0.98*height) # sets bottom y-pos ?
-        self.rect.left = width/15 # sets left pos of dinosaur
+        self.rect.left = width/15 # sets left pos of imagesaur
 
-        self.image = self.images[0] # initial dinosaur sprite
+        self.image = self.images[0] # initial imagesaur sprite
 
         self.index = 0 # sprite index in sprite sheet
         self.counter = 0 # keeps track of time passed
@@ -44,7 +44,7 @@ class Dino():
         self.isDucking = False
         self.isBlinking = False
 
-        self.movement = [0, 0] # x/y movement of dinosaur
+        self.movement = [0, 0] # x/y movement of imagesaur
         self.jumpSpeed = 11.5
 
         # stores width of ducking and standing dino
@@ -53,7 +53,7 @@ class Dino():
 
     # draws out dino on screen
     def draw(self):
-        screen.blit(self.dino, self.rect)
+        screen.blit(self.image, self.rect)
 
     # prevents dino from jumping out of bounds
     def checkbounds(self):
@@ -85,12 +85,12 @@ class Dino():
             self.index = 4
 
         if not self.isDucking:
-            self.sprite = self.dinos[self.index] # adjusts sprite accordingly
-            self.rect.width = self.rect
+            self.sprite = self.images[self.index] # adjusts sprite accordingly
+            self.rect.width = self.standing_width
         else:
             # adjusts sprite to ducking sprite
             self.sprite = self.images1[(self.index) % 2]
-            self.rect.width = self.rect1
+            self.rect.width = self.duck_width
 
         self.rect = self.rect.move(self.movement) # moves dino accordingly # Changed dino to rect -Alan :)
         self.checkbounds() # ensures dino stays on screen
