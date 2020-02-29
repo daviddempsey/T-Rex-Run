@@ -10,6 +10,7 @@ from dino import *
 from ground import *
 from ptera import *
 from scoreboard import *
+from intro_screen import *
 
 
 def game_controller():
