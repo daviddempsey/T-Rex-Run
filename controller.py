@@ -16,8 +16,8 @@ def game_controller():
     global high_score
     gamespeed = 4
     startMenu = False
-    gameOver = False
-    gameQuit = False
+    game_over = False
+    game_quit = False
     playerDino = Dino(44,47)
     new_ground = Ground(-1*gamespeed)
     scb = Scoreboard()
@@ -51,20 +51,20 @@ def game_controller():
     HI_rect.left = width*0.73
 
     # runs while game is not quit
-    while not gameQuit:
+    while not game_quit:
         while startMenu: # does nothing at start menu
             pass
-        while not gameOver:
+        while not game_over:
             if pygame.display.get_surface() == None: # can be removed?
                 print("Couldn't load display surface")
-                gameQuit = True
-                gameOver = True
+                game_quit = True
+                game_over = True
                 break
             else:
                 for event in pygame.event.get(): # quits game if necessary
                     if event.type == pygame.QUIT:
-                        gameQuit = True
-                        gameOver = True
+                        game_quit = True
+                        game_over = True
 
                     # handles ducking
                     if event.type == pygame.KEYDOWN:
@@ -158,7 +158,7 @@ def game_controller():
             clock.tick(FPS)
 
             if playerDino.isDead:
-                gameOver = True
+                game_over = True
                 if playerDino.score > high_score:
                     high_score = playerDino.score
 
@@ -168,30 +168,30 @@ def game_controller():
 
             counter = (counter + 1)
 
-        if gameQuit:
+        if game_quit:
             break
 
-        while gameOver:
+        while game_over:
             if pygame.display.get_surface() == None:
                 print("Couldn't load display surface")
-                gameQuit = True
-                gameOver = False
+                game_quit = True
+                game_over = False
             else:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
-                        gameQuit = True
-                        gameOver = False
+                        game_quit = True
+                        game_over = False
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_ESCAPE:
-                            gameQuit = True
-                            gameOver = False
+                            game_quit = True
+                            game_over = False
 
                         if event.key == pygame.K_RETURN or event.key == pygame.K_SPACE:
-                            gameOver = False
+                            game_over = False
                             gameplay()
             highsc.update(high_score)
             if pygame.display.get_surface() != None:
-                disp_gameOver_msg(retbutton_image,gameover_image)
+                disp_game_over_msg(retbutton_image,gameover_image)
                 if high_score != 0:
                     highsc.draw()
                     screen.blit(HI_image,HI_rect)
