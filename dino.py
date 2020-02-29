@@ -24,15 +24,15 @@ from scoreboard import *
 class Dino():
     def __init__(self, size_x = -1, size_y = -1):
         # loads standing dinosaur sprites
-        self.dinos, self.rect = load_sprites('dino.png', 5, 1, size_x, \
+        self.images, self.rect = load_sprites('dino.png', 5, 1, size_x, \
                                                  size_y)
         # loads ducking dinosaur sprites
-        self.duckingdinos, self.ducksize = load_sprites('dino_ducking.png',\
+        self.images1, self.rect1 = load_sprites('dino_ducking.png',\
                                                         2, 1, 59, size_y)
         self.rect.bottom = int(0.98*height) # sets bottom y-pos ?
         self.rect.left = width/15 # sets left pos of dinosaur
 
-        self.dino = self.dinos[0] # initial dinosaur sprite
+        self.image = self.images[0] # initial dinosaur sprite
 
         self.index = 0 # sprite index in sprite sheet
         self.counter = 0 # keeps track of time passed
@@ -49,7 +49,7 @@ class Dino():
 
         # stores width of ducking and standing dino
         self.standing_width = self.rect.width
-        self.duck_width = self.ducksize.width
+        self.duck_width = self.rect1.width
 
     # draws out dino on screen
     def draw(self):
@@ -86,11 +86,11 @@ class Dino():
 
         if not self.isDucking:
             self.sprite = self.dinos[self.index] # adjusts sprite accordingly
-            self.rect.width = self.standing_width
+            self.rect.width = self.rect
         else:
             # adjusts sprite to ducking sprite
-            self.sprite = self.duckingdinos[(self.index) % 2]
-            self.rect.width = self.duck_width
+            self.sprite = self.images1[(self.index) % 2]
+            self.rect.width = self.rect1
 
         self.rect = self.rect.move(self.movement) # moves dino accordingly # Changed dino to rect -Alan :)
         self.checkbounds() # ensures dino stays on screen
