@@ -1,9 +1,6 @@
-import os
-import sys
-import pygame
-from pygame import *
 
-from display import *
+
+
 from cactus import *
 from cloud import *
 from dino import *

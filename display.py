@@ -1,5 +1,4 @@
-import os,sys
-#sys.path.insert(0, "./Objects")
+import os
 import pygame
 from pygame import *
 

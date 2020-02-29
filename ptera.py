@@ -1,26 +1,17 @@
-import os
-import sys,inspect
-sys.path.insert(0, "./Objects")
-import pygame
-from pygame import *
 
-current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parent_dir = os.path.dirname(current_dir)
-sys.path.insert(0, parent_dir)
+
+
+
 from display import *
 
-from cactus import *
-from cloud import *
-from dino import *
-from ground import *
-from ptera import *
-from scoreboard import *
+
+
+
 
 class Ptera(pygame.sprite.Sprite):
     def __init__(self, speed=5, sizex=-1, sizey=-1):
         pygame.sprite.Sprite.__init__(self.self.containers)
-        self.pteras, self.rect = load_sprites('ptera.png', 2, 1, size_x,
-                                                   size_y)
+        self.pteras, self.rect = load_sprites('ptera.png', 2, 1, sizex,sizey)
         # various possible heights for pteradactyl
         self.ptera_height = [height*0.82, height*0.75, height*0.60]
         self.rect.centery = self.ptera_height[random.randrange(0,3)]
