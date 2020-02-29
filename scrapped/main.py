@@ -1,15 +1,8 @@
-import os
 import sys
 sys.path.insert(0, "./Objects")
 
-import pygame
-from pygame import *
-
 from dino import *
-from ptera import *
-from cactus import *
-from loadSprites import *
-from cloud import *
+from scrapped.loadSprites import *
 from ground import *
 from gameSetting import *
 
