@@ -12,6 +12,9 @@ from ptera import *
 from scoreboard import *
 from intro_screen import *
 
+jump_sound = pygame.mixer.Sound('sprites/jump.wav')
+die_sound = pygame.mixer.Sound('sprites/die.wav')
+checkPoint_sound = pygame.mixer.Sound('sprites/checkPoint.wav')
 
 def game_controller():
     global high_score

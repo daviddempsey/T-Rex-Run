@@ -31,7 +31,7 @@ def intro_screen():
             if event.type == pygame.KEYDOWN: # On a key press ...
                 if event.key == pygame.K_SPACE or event.key == pygame.K_UP: # If spacebar or up arrow is pressed then dino jumps
                     intro_dino.isJumping = True
-                    gameStart = False # CHANGE TO TRUE WHEN FINISHED WITH gameplay()
+                    gameStart = True # CHANGE TO TRUE WHEN FINISHED WITH gameplay()
                     intro_dino.movement[1] = -1 * intro_dino.jumpSpeed # Modifies y movement for dinosaur jumping
 
         intro_dino.update() # Dino will update when action is triggered
