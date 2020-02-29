@@ -13,9 +13,9 @@ pygame.display.set_caption("T-Rex-Run") # Sets window caption/title
 
 FPS = 60
 clock = pygame.time.Clock()
-
+gravity =0.6
 def load_image(filename, width = -1, height = -1):
-
+    """
     pygame.init() # Initialize pygame
 
     background_color = (235, 235, 235)
@@ -25,7 +25,7 @@ def load_image(filename, width = -1, height = -1):
 
     FPS = 60
     clock = pygame.time.Clock()
-
+    """
 
     path = os.path.join('sprites', filename) # Gets path of sprites in its directory
     image = pygame.image.load(path).convert() # Loads image from file name and convert it into pixel format
@@ -44,7 +44,7 @@ def load_image(filename, width = -1, height = -1):
     return (image, image.get_rect())
 
 def load_sprites(filename, sprites_horiz, sprites_vert, width = -1, height = -1):
-
+    """
     pygame.init() # Initialize pygame
 
     background_color = (235, 235, 235)
@@ -54,7 +54,7 @@ def load_sprites(filename, sprites_horiz, sprites_vert, width = -1, height = -1)
 
     FPS = 60
     clock = pygame.time.Clock()
-
+    """
 
     path = os.path.join('sprites', filename) # Gets path of sprites in its directory
     spritesheet = pygame.image.load(path).convert() # Loads image from file name and convert it into pixel format

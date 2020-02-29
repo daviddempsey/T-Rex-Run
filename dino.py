@@ -100,6 +100,6 @@ class Dino():
             self.score += 1 # score increases every update
             if self.score % 100 == 0 and self.score != 0: # checkpoint reached
                 if pygame.mixer.get_init() != None:
-                    checkPoint_sound.play()
+                    # checkPoint_sound.play()
 
         self.counter += 1 # increases time counter by 1
