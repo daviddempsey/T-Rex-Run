@@ -204,6 +204,7 @@ def game_controller():
 
 def intro_screen():
     intro_dino = Dino(44, 47) # Initializes intro screen with a dino
+    intro_dino.isBlinking = True
     gameStart = False # Game won't start until key press
 
     # Loads the callout image and its dimensions
@@ -227,7 +228,7 @@ def intro_screen():
             if event.type == pygame.KEYDOWN: # On a key press ...
                 if event.key == pygame.K_SPACE or event.key == pygame.K_UP: # If spacebar or up arrow is pressed then dino jumps
                     intro_dino.isJumping = True
-                    gameStart = True # CHANGE TO TRUE WHEN FINISHED WITH gameplay()
+                    intro_dino.isBlinking = False
                     intro_dino.movement[1] = -1 * intro_dino.jumpSpeed # Modifies y movement for dinosaur jumping
 
         intro_dino.update() # Dino will update when action is triggered
@@ -235,13 +236,16 @@ def intro_screen():
         # Intro screen initialized
         screen.fill(background_color)
         screen.blit(intro_ground[0], intro_ground_rect)
-        screen.blit(logo,logo_rect)
-        screen.blit(callout, callout_rect)
+        if intro_dino.isBlinking:
+            screen.blit(logo,logo_rect)
+            screen.blit(callout, callout_rect)
         intro_dino.draw()
 
         pygame.display.update() # Presents GUI
 
         clock.tick(FPS)
+        if intro_dino.isJumping == False and intro_dino.isBlinking == False:
+            gameStart = True
 
 
 def main():
