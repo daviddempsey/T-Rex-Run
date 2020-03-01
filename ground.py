@@ -13,7 +13,7 @@ class Ground():
 
         #placethegrondatthebottomofthescreen
         self.rect.bottom = self.rect1.bottom = height
-        self.rect.right = self.rect1.left#connect the two grounds
+        self.rect1.left = self.rect.right#connect the two grounds
 
         #setthespeed
         self.speed = speed
@@ -33,5 +33,5 @@ class Ground():
             self.rect.left = self.rect1.right
 
         #onceground2isoutofthescreen,placeitbehindground1
-        if self.rect.right<0:
+        if self.rect1.right<0:
             self.rect1.left = self.rect.right
