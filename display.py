@@ -68,9 +68,9 @@ def load_sprites(filename, sprites_horiz, sprites_vert, width = -1, height = -1)
 
 
 def disp_gameOver_msg(retry_btn_image, gameover_image):
-    retrybtn_rect = retbutton_image.get_rect()
-    retrybtn_rect.centerx = width / 2
-    retrybtn_rect.top = height * 0.52
+    retry_btn_rect = retry_btn_image.get_rect()
+    retry_btn_rect.centerx = width / 2
+    retry_btn_rect.top = height * 0.52
 
     gameover_rect = gameover_image.get_rect()
     gameover_rect.centerx = width / 2
