@@ -211,7 +211,7 @@ def intro_screen():
     callout_rect.left = width*0.05
     callout_rect.top = height*0.4
 
-    temp_ground,temp_ground_rect = load_sprite_sheet('ground.png',15,1,-1,-1,-1)
+    temp_ground,temp_ground_rect = load_sprites('ground.png',15,1,-1,-1,-1)
     temp_ground_rect.left = width/20
     temp_ground_rect.bottom = height
 
