@@ -1,9 +1,3 @@
-
-
-
-
-
-
 from display import *
 
 

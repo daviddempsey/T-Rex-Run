@@ -1,6 +1,3 @@
-
-
-
 from cactus import *
 from cloud import *
 from dino import *
