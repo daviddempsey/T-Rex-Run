@@ -47,8 +47,8 @@ def load_sprites(filename, sprites_horiz, sprites_vert, width = -1, height = -1)
     # Loops through each sprite
     for i in range(0, sprites_vert):
         for j in range(0, sprites_horiz):
-            vert_pos = i * height # y-position in sheet
-            horiz_pos = j * width # x-position in sheet
+            vert_pos = i * sizey # y-position in sheet
+            horiz_pos = j * sizex # x-position in sheet
             # Stores sprite position, width, and height
             sprite_rect = pygame.Rect((horiz_pos, vert_pos, sizex, sizey))
             sprite = pygame.Surface(sprite_rect.size).convert() # Gets surface for sprite and convert it into pixel format
