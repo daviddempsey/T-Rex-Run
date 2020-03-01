@@ -19,6 +19,6 @@ class Cloud(pygame.sprite.Sprite):
         screen.blit(self.image, self.rect) # draws cloud on screen
 
     def update(self):
-        self.image = self.image.move(self.movement)
+        self.rect = self.rect.move(self.movement)
         if self.rect.right < 0:
             self.kill() # removes cloud if out of bounds

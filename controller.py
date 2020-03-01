@@ -40,10 +40,10 @@ def game_controller():
     gameover_image,gameover_rect = load_image('game_over.png',190,11)
 
     # loads in numbers for keeping score
-    temp_images,temp_rect = load_sprite_sheet('numbers.png',12,1,11,int(11*6/5))
+    temp_images,temp_rect =load_sprites('numbers.png',12,1,11,int(11*6/5))
     HI_image = pygame.Surface((22,int(11*6/5)))
     HI_rect = HI_image.get_rect()
-    HI_image.fill(background_col)
+    HI_image.fill(background_color)
     HI_image.blit(temp_images[10],temp_rect)
     temp_rect.left += temp_rect.width
     HI_image.blit(temp_images[11],temp_rect)
@@ -127,7 +127,7 @@ def game_controller():
             highsc.update(high_score)
 
             if pygame.display.get_surface() != None:
-                screen.fill(background_col)
+                screen.fill(background_color)
                 new_ground.draw()
                 clouds.draw(screen)
                 scb.draw()
