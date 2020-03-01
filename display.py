@@ -33,6 +33,7 @@ def load_image(filename, width = -1, height = -1):
     return (image, image.get_rect())
 
 def load_sprites(filename, sprites_horiz, sprites_vert, width = -1, height = -1):
+    print(type(width),type(height))
     path = os.path.join('sprites', filename) # Gets path of sprites in its directory
     spritesheet = pygame.image.load(path).convert() # Loads image from file name and convert it into pixel format
 
@@ -40,8 +41,8 @@ def load_sprites(filename, sprites_horiz, sprites_vert, width = -1, height = -1)
 
     sprites = [] # Creates an array of sprites
 
-    width = sheet_rect.width / sprites_horiz # Width of each sprite
-    height = sheet_rect.height / sprites_vert # Height of each sprite
+    sizex = sheet_rect.width / sprites_horiz # Width of each sprite
+    sizey = sheet_rect.height / sprites_vert # Height of each sprite
 
     # Loops through each sprite
     for i in range(0, sprites_vert):
@@ -49,7 +50,7 @@ def load_sprites(filename, sprites_horiz, sprites_vert, width = -1, height = -1)
             vert_pos = i * height # y-position in sheet
             horiz_pos = j * width # x-position in sheet
             # Stores sprite position, width, and height
-            sprite_rect = pygame.Rect((horiz_pos, vert_pos, width, height))
+            sprite_rect = pygame.Rect((horiz_pos, vert_pos, sizex, sizey))
             sprite = pygame.Surface(sprite_rect.size).convert() # Gets surface for sprite and convert it into pixel format
             sprite.blit(spritesheet, (0,0), sprite_rect) # Draws sprite out
 
@@ -57,7 +58,7 @@ def load_sprites(filename, sprites_horiz, sprites_vert, width = -1, height = -1)
             sprite.set_colorkey(colorkey, RLEACCEL)
 
             if width != -1 or height != -1: # Scales appropriately
-                sprite = pygame.transform.scale(sprite, (int(width), int(height)))
+                sprite = pygame.transform.scale(sprite, (width, height))
 
             sprites.append(sprite) # Appends sprite to sprite array
 
