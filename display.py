@@ -33,7 +33,6 @@ def load_image(filename, width = -1, height = -1):
     return (image, image.get_rect())
 
 def load_sprites(filename, sprites_horiz, sprites_vert, width = -1, height = -1):
-    print(type(width),type(height))
     path = os.path.join('sprites', filename) # Gets path of sprites in its directory
     spritesheet = pygame.image.load(path).convert() # Loads image from file name and convert it into pixel format
 

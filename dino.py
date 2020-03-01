@@ -75,11 +75,11 @@ class Dino():
             self.index = 4
 
         if not self.isDucking:
-            self.sprite = self.images[self.index] # adjusts sprite accordingly
+            self.image = self.images[self.index] # adjusts sprite accordingly
             self.rect.width = self.standing_width
         else:
             # adjusts sprite to ducking sprite
-            self.sprite = self.images1[(self.index) % 2]
+            self.image = self.images1[(self.index) % 2]
             self.rect.width = self.duck_width
 
         self.rect = self.rect.move(self.movement) # moves dino accordingly # Changed dino to rect -Alan :)
