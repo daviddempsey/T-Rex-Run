@@ -172,7 +172,7 @@ def game_controller():
 
                         if event.key == pygame.K_RETURN or event.key == pygame.K_SPACE:
                             gameOver = False
-                            gameplay()
+                            game_controller()
             highsc.update(high_score)
             if pygame.display.get_surface() != None:
                 disp_gameOver_msg(retbutton_image,gameover_image)
