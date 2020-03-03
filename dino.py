@@ -46,6 +46,7 @@ class Dino():
             self.isJumping = False
 
     def update(self):
+        print(self.movement)
         if self.isJumping: # accounts for gravity
             self.movement[1] = self.movement[1] + gravity
             self.index = 0
